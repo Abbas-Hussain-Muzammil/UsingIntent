@@ -2,6 +2,7 @@ package com.example.usingintent;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
@@ -10,32 +11,45 @@ import android.widget.TextView;
 
 public class MainActivity extends AppCompatActivity {
 
+    private int launchCount = 0;
+    @SuppressLint("MissingInflatedId")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        // Initialize SharedPreferences
-        SharedPreferences sharedPreferences = getSharedPreferences("MyPrefs", MODE_PRIVATE);
-        int launchCount = sharedPreferences.getInt("launchCount", 0);
-
-        // Increment the count
-        launchCount++;
-
-        // Store the updated count
-        SharedPreferences.Editor editor = sharedPreferences.edit();
-        editor.putInt("launchCount", launchCount);
-        editor.apply();
-
-        // Display the count
-        TextView countTextView = findViewById(R.id.textView2); // Replace with your TextView ID
-        countTextView.setText("Count: " + launchCount);
-
-
+        // Launch the SecondActivity when a button is clicked
+        findViewById(R.id.buttonGoToSecond).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(MainActivity.this, SecondActivity.class));
+            }
+        });
     }
 
-    public void onClick(View view) {
-        startActivity(new Intent("com.username.usingintent.SecondActivity"));
+    private void updateCountTextView() {
+        TextView countTextView = findViewById(R.id.textView2); // Replace with your TextView ID
+        System.out.print(launchCount);
+        countTextView.setText("Count: " + launchCount);
+    }
+
+
+    @Override
+    protected void onSaveInstanceState(Bundle outState) {
+        super.onSaveInstanceState(outState);
+        // Save the count to the instance state bundle
+        outState.putInt("launchCount", launchCount);
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+
+        // Increment the count when the main activity is resumed
+        launchCount++;
+
+        // Update and display the count
+        updateCountTextView();
     }
 
 }

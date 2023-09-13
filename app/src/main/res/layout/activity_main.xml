@@ -45,13 +45,13 @@
         android:layout_height="wrap_content"
         android:text="Display second activity"
         android:onClick="onClick"
-        android:id="@+id/button"
+        android:id="@+id/buttonGoToSecond"
         android:layout_below="@+id/textView"
         android:layout_alignParentStart="true"
         android:layout_marginTop="56dp"
         app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
         tools:ignore="MissingConstraints" />
 
 
