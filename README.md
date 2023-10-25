@@ -4,6 +4,11 @@ Learnings:
 
 We can establish communication between activities through intent.
 
+What is an Activity?
+The whole screen of our Mobile
+
+The prebuilt Activity in every other Mobile is known as MainActivity.java which is a java class file.
+
 Steps
 
 1. Go to New Project
